@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('preferred_timezone');
-            $table->timestamps();
+        Schema::create('user_appointments', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('appointment_id')->constrained();
+            $table->primary(['user_id', 'appointment_id']);
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_appointments');
     }
 };
